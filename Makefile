@@ -1,6 +1,9 @@
 TARGET = main
 .DEFAULT_GOAL = all
 
+ASTYLE ?= astyle
+QEMU ?= ../qemu_stm32/arm-softmmu/qemu-system-arm
+
 CROSS_COMPILE ?= arm-none-eabi-
 CC := $(CROSS_COMPILE)gcc
 CFLAGS = -fno-common -ffreestanding -O0 \
@@ -40,11 +43,6 @@ OBJ := $(addprefix $(OUTDIR)/,$(patsubst %.s,%.o,$(SRC:.c=.o)))
 DEP = $(OBJ:.o=.o.d)
 DAT =
 
-MAKDIR = mk
-MAK = $(wildcard $(MAKDIR)/*.mk)
-
-include $(MAK)
-
 all: $(OUTDIR)/$(TARGET).bin $(OUTDIR)/$(TARGET).lst
 
 $(OUTDIR)/$(TARGET).bin: $(OUTDIR)/$(TARGET).elf
@@ -72,5 +70,11 @@ $(OUTDIR)/%.o: %.s
 
 clean:
 	rm -rf $(OUTDIR)
+
+qemu:
+	$(QEMU) -M stm32-p103 -kernel $(OUTDIR)/$(TARGET).bin
+
+style:
+	$(ASTYLE) --style=kr --indent=spaces=4 --indent-switches --suffix=none "src/*.c" "include/*.h"
 
 -include $(DEP)
