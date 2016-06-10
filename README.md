@@ -1,2 +1,2 @@
-# tmpOS
-This is tmpOS
+# rnrOS
+This is rnrOS
