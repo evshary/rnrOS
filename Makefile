@@ -75,6 +75,6 @@ qemu:
 	$(QEMU) -M stm32-p103 -kernel $(OUTDIR)/$(TARGET).bin
 
 style:
-	$(ASTYLE) --style=kr --indent=spaces=4 --indent-switches --suffix=none "src/*.c" "include/*.h"
+	$(ASTYLE) --style=kr --indent=spaces=4 -S -H -U -p --suffix=none "src/*.c" "include/*.h"
 
 -include $(DEP)
