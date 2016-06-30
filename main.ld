@@ -1,9 +1,11 @@
 ENTRY(main)
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 128K
+  FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 128K
   RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 20K
 }
+
+_sidata = 0x20000000;
 
 SECTIONS
 {
@@ -17,7 +19,6 @@ SECTIONS
 		_sromdev = .;
 		*(.rom.*)
 		_eromdev = .;
-		_sidata = .;
 	} >FLASH
 
 	/* Initialized data will initially be loaded in FLASH at the end of the .text section. */
@@ -29,7 +30,8 @@ SECTIONS
 		_edata = .;
 	} >RAM
 
-	.bss : {
+	.bss :
+	{
 		_sbss = .;
 		*(.bss)         /* Zero-filled run time allocate data memory */
 		_ebss = .;
