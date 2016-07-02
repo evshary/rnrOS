@@ -19,10 +19,11 @@ SECTIONS
 		_sromdev = .;
 		*(.rom.*)
 		_eromdev = .;
+		_sidata = .;
 	} >FLASH
 
 	/* Initialized data will initially be loaded in FLASH at the end of the .text section. */
-	.data : AT (_sidata)
+	.data : AT(_sidata)
 	{
 		_sdata = .;
 		*(.data)		/* Initialized data */

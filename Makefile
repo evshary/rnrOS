@@ -51,7 +51,7 @@ $(OUTDIR)/$(TARGET).lst: $(OUTDIR)/$(TARGET).elf
 $(OUTDIR)/$(TARGET).elf: $(OBJ)
 	@echo "    LD      "$@
 	@echo "    MAP     "$(OUTDIR)/$(TARGET).map
-	@$(CC) $(CFLAGS) -T$(LINKER) -Wl,-Map=$(OUTDIR)/$(TARGET).map -o $@ $^
+	@$(CC) $(CFLAGS) -Wl,-Map=$(OUTDIR)/$(TARGET).map -o $@ $^
 
 $(OUTDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
