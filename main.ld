@@ -5,7 +5,6 @@ MEMORY
   RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 20K
 }
 
-_sidata = 0x20000000;
 
 SECTIONS
 {
@@ -19,6 +18,7 @@ SECTIONS
 		_sromdev = .;
 		*(.rom.*)
 		_eromdev = .;
+        _sidata = .;
 	} >FLASH
 
 	/* Initialized data will initially be loaded in FLASH at the end of the .text section. */

@@ -51,7 +51,7 @@ $(OUTDIR)/$(TARGET).lst: $(OUTDIR)/$(TARGET).elf
 $(OUTDIR)/$(TARGET).elf: $(OBJ)
 	@echo "    LD      "$@
 	@echo "    MAP     "$(OUTDIR)/$(TARGET).map
-	@$(CC) $(CFLAGS) -T$(LINKER) -Wl,-Map=$(OUTDIR)/$(TARGET).map -o $@ $^
+	@$(CC) $(CFLAGS) -Wl,-Map=$(OUTDIR)/$(TARGET).map -o $@ $^
 
 $(OUTDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -70,6 +70,6 @@ qemu:
 	$(QEMU) -M stm32-p103 -kernel $(OUTDIR)/$(TARGET).bin
 
 style:
-	$(ASTYLE) --style=kr --indent=spaces=4 -S -H -U -p --suffix=none "src/*.c" "include/*.h"
+	$(ASTYLE) --style=kr --indent=spaces=4 -S -H -U -p --suffix=none "src/*.c"
 
 -include $(DEP)

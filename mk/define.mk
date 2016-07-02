@@ -10,4 +10,5 @@ CFLAGS = -fno-common -ffreestanding -O0 \
 
 LINKER = main.ld
 
-QEMU ?= qemu-system-arm
+QEMU ?= ../qemu_stm32/arm-softmmu/qemu-system-arm
+ASTYLE ?= astyle
