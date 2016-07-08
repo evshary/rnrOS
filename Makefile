@@ -1,11 +1,13 @@
 include mk/define.mk
 
-BOARD ?= STM32F4X
+BOARD ?= STM32F407
 
 ifeq ($(BOARD), STM32F10)
 	include mk/STM32F10.mk
+else ifeq ($(BOARD), STM32F429)
+	include mk/STM32F429.mk
 else
-	include mk/STM32F4X.mk
+	include mk/STM32F407.mk
 endif
 
 
@@ -70,6 +72,6 @@ qemu:
 	$(QEMU) -M stm32-p103 -kernel $(OUTDIR)/$(TARGET).bin
 
 style:
-	$(ASTYLE) --style=kr --indent=spaces=4 -S -H -U -p --suffix=none "src/*.c"
+	$(ASTYLE) --style=kr --indent=spaces=4 -S -H -U -p --suffix=none "src/*.c" "include/*.h"
 
 -include $(DEP)
